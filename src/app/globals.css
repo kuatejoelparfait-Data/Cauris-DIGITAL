@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-cauris-orange: 232 100 10;
+    --color-cauris-black: 26 26 46;
+    --color-cauris-cream: 255 245 238;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-white text-cauris-gray-text font-body;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading text-cauris-black;
+  }
+
+  /* Focus accessible (WCAG 2.1 AA - CDC §7.3) */
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-cauris-orange;
+  }
+
+  /* Sélection de texte */
+  ::selection {
+    @apply bg-cauris-orange text-white;
+  }
+}
+
+@layer components {
+  /* Container responsive */
+  .container-cauris {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Boutons - CDC §5.3 */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-btn bg-cauris-orange px-7 py-3.5
+           text-[15px] font-semibold uppercase tracking-wide text-white
+           transition-all duration-200 ease-cauris
+           hover:bg-cauris-orange-dark hover:-translate-y-0.5 hover:shadow-cta
+           focus-visible:outline-cauris-orange
+           disabled:cursor-not-allowed disabled:bg-gray-300 disabled:hover:translate-y-0 disabled:hover:shadow-none;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-btn border-2 border-cauris-orange px-7 py-3.5
+           text-[15px] font-semibold uppercase tracking-wide text-cauris-orange
+           transition-all duration-200 ease-cauris
+           hover:bg-cauris-orange hover:text-white hover:-translate-y-0.5
+           focus-visible:outline-cauris-orange;
+  }
+
+  .btn-tertiary {
+    @apply inline-flex items-center gap-1.5 text-cauris-orange font-semibold
+           transition-colors duration-200
+           hover:underline underline-offset-4;
+  }
+
+  /* Cartes */
+  .card {
+    @apply bg-white rounded-card shadow-card transition-all duration-300 ease-cauris
+           hover:shadow-card-hover hover:-translate-y-1;
+  }
+
+  /* Sections */
+  .section {
+    @apply py-section;
+  }
+
+  .section-alt {
+    @apply bg-cauris-gray-bg;
+  }
+
+  /* Animation au scroll */
+  .reveal {
+    @apply opacity-0 translate-y-6 transition-all duration-700 ease-cauris;
+  }
+  .reveal.is-visible {
+    @apply opacity-100 translate-y-0;
+  }
+
+  /* Tags / chips */
+  .tag {
+    @apply inline-flex items-center rounded-full bg-cauris-cream px-3 py-1
+           text-[13px] font-medium text-cauris-orange;
+  }
+
+  /* Lien dans le menu */
+  .nav-link {
+    @apply text-cauris-black/80 font-medium transition-colors duration-200
+           hover:text-cauris-orange focus-visible:text-cauris-orange;
+  }
+}
+
+@layer utilities {
+  /* Marquee partenaires */
+  .mask-fade-x {
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+
+  /* Texte gradient orange */
+  .text-gradient-orange {
+    @apply bg-gradient-to-r from-cauris-orange to-cauris-orange-light bg-clip-text text-transparent;
+  }
+}
+
+/* Reduce motion respect */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
