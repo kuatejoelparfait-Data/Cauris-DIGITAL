@@ -5,9 +5,9 @@ import SectionTitle from '@/components/ui/SectionTitle';
 import { SITE_CONFIG } from '@/lib/constants';
 
 export const metadata: Metadata = {
-  title: 'Contact',
+  title: 'Contactez CAURIS DIGITAL — Yaoundé, Cameroun | Incubateur numérique africain',
   description:
-    'Contactez l\'équipe CAURIS DIGITAL pour candidater à un programme, devenir partenaire ou poser une question. Réponse sous 48h ouvrées.',
+    'Contactez l\'équipe de CAURIS DIGITAL pour une candidature, un partenariat ou toute question. Basés à Yaoundé, nous répondons sous 48h ouvrées.',
 };
 
 interface PageProps {
@@ -25,11 +25,11 @@ export default function ContactPage({ searchParams }: PageProps) {
               Contact
             </p>
             <h1 className="font-heading font-extrabold text-4xl sm:text-5xl lg:text-6xl leading-[1.1] text-cauris-black mb-6">
-              Parlons de votre projet.
+              Contactez-nous
             </h1>
             <p className="text-lg text-cauris-gray-text leading-relaxed">
-              Que vous soyez fondateur, partenaire institutionnel, corporate ou journaliste, notre
-              équipe est à votre écoute. Nous répondons sous 48h ouvrées.
+              Une question sur nos programmes ? Un projet de partenariat ? Une idée à partager ?
+              Notre équipe répond sous 48h ouvrées.
             </p>
           </div>
         </div>

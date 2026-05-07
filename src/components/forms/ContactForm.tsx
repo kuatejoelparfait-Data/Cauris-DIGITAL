@@ -1,18 +1,53 @@
 'use client';
 
 import { useState, type FormEvent } from 'react';
+import Link from 'next/link';
 import { Send, Check, AlertCircle, Loader2 } from 'lucide-react';
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
 
+/**
+ * Objets du formulaire (Textes_Site_v1)
+ * Note : 'candidature' (depuis le bouton Hero) mappe sur 'Candidature à un programme'.
+ */
 const SUBJECTS = [
-  { value: 'general', label: 'Question générale' },
+  { value: 'candidature', label: 'Candidature à un programme' },
   { value: 'candidature-incubation', label: 'Candidature programme Incubation' },
   { value: 'candidature-acceleration', label: 'Candidature programme Accélération' },
-  { value: 'partenariat', label: 'Partenariat institutionnel' },
-  { value: 'corporate', label: 'Partenariat corporate / Innovation' },
-  { value: 'presse', label: 'Demande presse / médias' },
+  { value: 'partenariat-corporate', label: 'Partenariat corporate' },
+  { value: 'mentorat', label: 'Demande de mentorat' },
+  { value: 'presse', label: 'Presse et médias' },
+  { value: 'evenement', label: 'Invitation à un événement' },
   { value: 'autre', label: 'Autre' },
+];
+
+/**
+ * Pays prioritaires en haut, puis liste alphabétique courte (FR/Afrique).
+ */
+const COUNTRIES = [
+  'Cameroun',
+  'Côte d\'Ivoire',
+  'Sénégal',
+  'République Démocratique du Congo',
+  'République du Congo',
+  'Gabon',
+  'Tchad',
+  'Centrafrique',
+  'Bénin',
+  'Burkina Faso',
+  'Mali',
+  'Niger',
+  'Togo',
+  'Guinée',
+  'Madagascar',
+  'France',
+  'Belgique',
+  'Suisse',
+  'Canada',
+  'Maroc',
+  'Tunisie',
+  'Algérie',
+  'Autre',
 ];
 
 export default function ContactForm({ defaultSubject = '' }: { defaultSubject?: string }) {
@@ -57,10 +92,17 @@ export default function ContactForm({ defaultSubject = '' }: { defaultSubject?: 
           <Check className="w-8 h-8 text-cauris-success" />
         </div>
         <h3 className="font-heading font-bold text-xl text-cauris-black mb-2">
-          Message envoyé avec succès
+          Merci pour votre message !
         </h3>
-        <p className="text-cauris-gray-text">
-          Merci pour votre message. Notre équipe vous répondra dans les 48 heures ouvrées.
+        <p className="text-cauris-gray-text mb-2">
+          Notre équipe vous répondra dans les 48h ouvrées.
+        </p>
+        <p className="text-sm text-cauris-gray-secondary">
+          En attendant, découvrez{' '}
+          <Link href="/programme-incubation" className="text-cauris-orange hover:underline">
+            nos programmes
+          </Link>{' '}
+          ou abonnez-vous à notre newsletter pour rester informé de nos actualités.
         </p>
         <button
           type="button"
@@ -114,18 +156,42 @@ export default function ContactForm({ defaultSubject = '' }: { defaultSubject?: 
         </div>
       </div>
 
-      <div>
-        <label htmlFor="email" className="block text-sm font-medium text-cauris-black mb-2">
-          Email <span className="text-cauris-error">*</span>
-        </label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          required
-          autoComplete="email"
-          className="w-full px-4 py-3 border border-gray-200 rounded-btn focus:outline-none focus:border-cauris-orange focus:ring-1 focus:ring-cauris-orange transition-colors"
-        />
+      <div className="grid sm:grid-cols-2 gap-5">
+        <div>
+          <label htmlFor="email" className="block text-sm font-medium text-cauris-black mb-2">
+            Email <span className="text-cauris-error">*</span>
+          </label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            required
+            autoComplete="email"
+            className="w-full px-4 py-3 border border-gray-200 rounded-btn focus:outline-none focus:border-cauris-orange focus:ring-1 focus:ring-cauris-orange transition-colors"
+          />
+        </div>
+        <div>
+          <label htmlFor="country" className="block text-sm font-medium text-cauris-black mb-2">
+            Pays <span className="text-cauris-error">*</span>
+          </label>
+          <select
+            id="country"
+            name="country"
+            required
+            autoComplete="country-name"
+            defaultValue=""
+            className="w-full px-4 py-3 border border-gray-200 rounded-btn focus:outline-none focus:border-cauris-orange focus:ring-1 focus:ring-cauris-orange transition-colors bg-white"
+          >
+            <option value="" disabled>
+              Sélectionnez un pays…
+            </option>
+            {COUNTRIES.map((c) => (
+              <option key={c} value={c}>
+                {c}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
 
       <div>
@@ -174,9 +240,9 @@ export default function ContactForm({ defaultSubject = '' }: { defaultSubject?: 
         />
         <label htmlFor="consent" className="text-sm text-cauris-gray-secondary leading-relaxed">
           J&apos;accepte que mes données soient utilisées pour traiter ma demande, conformément à la{' '}
-          <a href="/confidentialite" className="text-cauris-orange hover:underline">
+          <Link href="/politique-de-confidentialite" className="text-cauris-orange hover:underline">
             politique de confidentialité
-          </a>
+          </Link>
           .
         </label>
       </div>
