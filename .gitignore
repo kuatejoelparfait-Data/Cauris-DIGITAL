@@ -46,3 +46,6 @@ next-env.d.ts
 
 # OS
 Thumbs.db
+
+# Brouillon images (les vraies images sont copiées dans public/images/)
+/images
