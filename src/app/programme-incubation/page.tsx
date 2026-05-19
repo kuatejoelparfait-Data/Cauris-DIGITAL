@@ -16,7 +16,7 @@ import Button from '@/components/ui/Button';
 import SectionTitle from '@/components/ui/SectionTitle';
 import Reveal from '@/components/ui/Reveal';
 import FinalCTA from '@/components/sections/FinalCTA';
-import { PROGRAMS } from '@/lib/constants';
+import { PROGRAMS, BRAND_IMAGES } from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: 'Programme Incubation — CAURIS DIGITAL | 6 mois pour lancer votre startup tech',
@@ -150,8 +150,8 @@ export default function IncubationProgramPage() {
             <div className="lg:col-span-2">
               <div className="aspect-[4/5] rounded-card overflow-hidden shadow-card-hover">
                 <img
-                  src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80"
-                  alt="Session de pitch durant le programme d'incubation"
+                  src={BRAND_IMAGES.incubationHero}
+                  alt="Entrepreneure africaine en session de travail durant le programme d'incubation"
                   className="w-full h-full object-cover"
                   loading="lazy"
                 />
@@ -328,7 +328,8 @@ export default function IncubationProgramPage() {
                   </p>
                   <div className="flex items-center gap-3 pt-4 border-t border-gray-100">
                     <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cauris-orange to-cauris-orange-light flex items-center justify-center text-white font-bold text-sm">
-                      {t.name.charAt(1) || 'P'}
+                      {/* On extrait la première lettre non-spéciale (ignore les crochets des placeholders [Prénom NOM]) */}
+                      {t.name.replace(/[\[\]]/g, '').trim().charAt(0) || 'P'}
                     </div>
                     <div>
                       <p className="font-semibold text-cauris-black text-sm">

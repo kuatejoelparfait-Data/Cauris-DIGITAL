@@ -229,22 +229,24 @@ export default function StartupsExplorer() {
                   </p>
 
                   <div className="flex items-center gap-2 pt-4 border-t border-gray-100">
-                    <button
-                      type="button"
-                      className="text-cauris-gray-secondary hover:text-cauris-orange transition-colors"
-                      aria-label={`Visiter le site de ${s.name}`}
-                      title="Site web (à venir)"
+                    {/* Boutons désactivés visuellement tant que les URL ne sont pas renseignées */}
+                    <span
+                      className="text-cauris-gray-secondary/40 cursor-not-allowed inline-flex"
+                      aria-label={`Site web de ${s.name} bientôt disponible`}
+                      title="Site web à venir"
                     >
-                      <ExternalLink className="w-4 h-4" />
-                    </button>
-                    <button
-                      type="button"
-                      className="text-cauris-gray-secondary hover:text-cauris-orange transition-colors"
-                      aria-label={`LinkedIn de ${s.name}`}
-                      title="LinkedIn (à venir)"
+                      <ExternalLink className="w-4 h-4" aria-hidden="true" />
+                    </span>
+                    <span
+                      className="text-cauris-gray-secondary/40 cursor-not-allowed inline-flex"
+                      aria-label={`LinkedIn de ${s.name} bientôt disponible`}
+                      title="LinkedIn à venir"
                     >
-                      <Linkedin className="w-4 h-4" />
-                    </button>
+                      <Linkedin className="w-4 h-4" aria-hidden="true" />
+                    </span>
+                    <span className="text-[10px] text-cauris-gray-secondary/60 italic ml-1">
+                      Liens à venir
+                    </span>
                   </div>
                 </article>
               );

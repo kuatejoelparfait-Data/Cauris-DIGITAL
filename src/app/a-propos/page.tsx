@@ -3,7 +3,7 @@ import { Linkedin, Trophy, Users, Target, Handshake, Globe2, Globe } from 'lucid
 import SectionTitle from '@/components/ui/SectionTitle';
 import Reveal from '@/components/ui/Reveal';
 import FinalCTA from '@/components/sections/FinalCTA';
-import { VALUES } from '@/lib/constants';
+import { VALUES, TEAM_PHOTOS, BRAND_IMAGES } from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: 'À propos de CAURIS DIGITAL — Incubateur numérique, Yaoundé, Cameroun',
@@ -28,28 +28,28 @@ const TEAM = [
   {
     name: '[Prénom NOM]',
     role: 'Directeur Général & Co-fondateur',
-    photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80',
+    photo: TEAM_PHOTOS.directorGeneral,
     bio: 'Entrepreneur numérique avec [X] ans d\'expérience dans l\'accompagnement de startups africaines. Diplômé en [discipline] de [université]. Passionné par l\'impact de la technologie sur les économies émergentes.',
     linkedin: '#',
   },
   {
     name: '[Prénom NOM]',
     role: 'Directrice des Programmes',
-    photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80',
+    photo: TEAM_PHOTOS.programDirector,
     bio: 'Spécialiste de l\'innovation et de l\'accompagnement entrepreneurial. [X] ans d\'expérience dans le secteur de l\'incubation en Afrique centrale. Co-fondatrice de [projet]. Diplômée de [université].',
     linkedin: '#',
   },
   {
     name: '[Prénom NOM]',
     role: 'Responsable Mentorat & Communauté',
-    photo: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80',
+    photo: TEAM_PHOTOS.mentorshipLead,
     bio: 'Construit des ponts entre entrepreneurs et experts. Ancien fondateur de [startup]. Expert en développement communautaire et accompagnement de porteurs de projets tech.',
     linkedin: '#',
   },
   {
     name: '[Prénom NOM]',
     role: 'Chargée de Communication & Partenariats',
-    photo: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80',
+    photo: TEAM_PHOTOS.communicationLead,
     bio: 'Experte en communication digitale et en relations institutionnelles. [X] ans d\'expérience dans la promotion de l\'écosystème tech africain. Passionnée par le storytelling et la visibilité des startups africaines.',
     linkedin: '#',
   },
@@ -134,8 +134,8 @@ export default function AboutPage() {
               <div className="space-y-6 lg:sticky lg:top-28">
                 <div className="aspect-[4/5] rounded-card overflow-hidden shadow-card-hover">
                   <img
-                    src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=600&q=80"
-                    alt="Équipe CAURIS DIGITAL en réunion"
+                    src={BRAND_IMAGES.aboutHistory}
+                    alt="Équipe d'entrepreneurs africains en session collaborative"
                     className="w-full h-full object-cover"
                     loading="lazy"
                   />
@@ -264,10 +264,8 @@ export default function AboutPage() {
               </Reveal>
             ))}
           </div>
-          <p className="mt-10 text-xs text-cauris-gray-secondary italic max-w-2xl">
-            Note : les noms et bios ci-dessus sont des modèles à personnaliser. Les membres réels
-            de l&apos;équipe seront ajoutés via le CMS lors du lancement.
-          </p>
+          {/* TODO développeur : remplacer les placeholders [Prénom NOM] par les vraies bios
+              via le CMS avant la mise en ligne. Voir Audit §3.3. */}
         </div>
       </section>
 

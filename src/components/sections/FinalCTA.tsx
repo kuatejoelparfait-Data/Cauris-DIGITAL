@@ -29,7 +29,7 @@ export default function FinalCTA() {
               <ArrowRight className="w-5 h-5" />
             </a>
             <a
-              href="#programmes"
+              href="/programme-incubation"
               className="inline-flex items-center gap-2 text-white underline-offset-4 hover:underline font-medium"
             >
               En savoir plus sur nos programmes

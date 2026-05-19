@@ -14,7 +14,7 @@ import Button from '@/components/ui/Button';
 import SectionTitle from '@/components/ui/SectionTitle';
 import Reveal from '@/components/ui/Reveal';
 import FinalCTA from '@/components/sections/FinalCTA';
-import { PROGRAMS } from '@/lib/constants';
+import { PROGRAMS, BRAND_IMAGES } from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: 'Programme Accélération — CAURIS DIGITAL | 12 semaines pour accélérer votre croissance',
@@ -126,8 +126,8 @@ export default function AccelerationProgramPage() {
             <div className="lg:col-span-2">
               <div className="aspect-[4/5] rounded-card overflow-hidden shadow-card-hover">
                 <img
-                  src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=600&q=80"
-                  alt="Entrepreneur en visioconférence durant le programme d'accélération"
+                  src={BRAND_IMAGES.accelerationHero}
+                  alt="Entrepreneur africain en session de travail durant le programme d'accélération"
                   className="w-full h-full object-cover"
                   loading="lazy"
                 />
@@ -182,17 +182,21 @@ export default function AccelerationProgramPage() {
           />
 
           <div className="mt-14 max-w-5xl mx-auto">
-            <div className="overflow-x-auto rounded-card shadow-card border border-gray-100 bg-white">
-              <table className="w-full">
+            <div className="overflow-x-auto rounded-card shadow-card border border-gray-100 bg-white -mx-4 sm:mx-0">
+              {/* Hint scroll horizontal sur mobile */}
+              <p className="sm:hidden text-xs text-cauris-gray-secondary italic text-center py-2 bg-cauris-cream/30">
+                ← Faites défiler horizontalement pour comparer →
+              </p>
+              <table className="w-full min-w-[640px]">
                 <thead>
                   <tr className="bg-cauris-black text-white">
-                    <th className="text-left px-5 py-4 font-heading font-semibold text-sm uppercase tracking-wider">
+                    <th className="text-left px-5 py-4 font-heading font-semibold text-sm uppercase tracking-wider whitespace-nowrap">
                       Critère
                     </th>
-                    <th className="text-left px-5 py-4 font-heading font-semibold text-sm uppercase tracking-wider">
+                    <th className="text-left px-5 py-4 font-heading font-semibold text-sm uppercase tracking-wider whitespace-nowrap">
                       Programme Incubation
                     </th>
-                    <th className="text-left px-5 py-4 font-heading font-semibold text-sm uppercase tracking-wider bg-cauris-orange">
+                    <th className="text-left px-5 py-4 font-heading font-semibold text-sm uppercase tracking-wider bg-cauris-orange whitespace-nowrap">
                       Programme Accélération
                     </th>
                   </tr>
