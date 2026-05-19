@@ -198,18 +198,6 @@ export const TESTIMONIALS = [
 ];
 
 /**
- * Logos partenaires (CDC §2.1)
- */
-export const PARTNERS = [
-  { name: 'Union Africaine', logo: '/partners/au.svg' },
-  { name: 'Banque Africaine de Développement', logo: '/partners/bad.svg' },
-  { name: 'CEMAC', logo: '/partners/cemac.svg' },
-  { name: 'Université de Yaoundé I', logo: '/partners/uy1.svg' },
-  { name: 'Polytechnique Yaoundé', logo: '/partners/polytech.svg' },
-  { name: 'Orange Digital Center', logo: '/partners/orange.svg' },
-];
-
-/**
  * Startups vedettes (placeholder — à remplacer via CMS)
  */
 export const FEATURED_STARTUPS = [
@@ -404,3 +392,511 @@ export const CONTACT_OBJECTS = [
   'Invitation à un événement',
   'Autre',
 ] as const;
+
+/**
+ * Banque d'images du site CAURIS DIGITAL.
+ *
+ * Les images sont stockées localement dans `public/images/entrepreneurs/`
+ * et servies sous l'URL `/images/entrepreneurs/...`.
+ *
+ * Mettre à jour ces chemins lorsque de nouvelles photos seront disponibles.
+ */
+export const BRAND_IMAGES = {
+  // Hero homepage — fond plein écran (équipe d'entrepreneurs africains)
+  heroBackground: '/images/entrepreneurs/equipe-jeunes-africains-bureau.webp',
+
+  // IntroBlock — grille 4 images (entrepreneurs au travail)
+  introPitch: '/images/entrepreneurs/femme-dirigeante-bras-croises.avif',
+  introMentoring: '/images/entrepreneurs/entrepreneur-portrait.jpg',
+  introCoworking: '/images/entrepreneurs/entrepreneur-bureau.jpg',
+  introWorkshop: '/images/entrepreneurs/entrepreneur-succes.png',
+
+  // À propos — image principale "Notre histoire"
+  aboutHistory: '/images/entrepreneurs/femme-entrepreneure-portrait.jpg',
+
+  // Programme Incubation — hero
+  incubationHero: '/images/entrepreneurs/entrepreneur-bureau.jpg',
+
+  // Programme Accélération — hero
+  accelerationHero: '/images/entrepreneurs/femme-dirigeante-bras-croises.avif',
+
+  // Innovation Corporative — image de section
+  corporateMeeting: '/images/entrepreneurs/equipe-jeunes-africains-bureau.webp',
+} as const;
+
+/**
+ * Portraits d'équipe — photos placeholder.
+ * Format carré 400×400 recommandé par le CDC.
+ */
+export const TEAM_PHOTOS = {
+  directorGeneral: '/images/entrepreneurs/entrepreneur-portrait.jpg',
+  programDirector: '/images/entrepreneurs/femme-entrepreneure-portrait.jpg',
+  mentorshipLead: '/images/entrepreneurs/entrepreneur-succes.png',
+  communicationLead: '/images/entrepreneurs/femme-dirigeante-bras-croises.avif',
+} as const;
+
+/**
+ * Logos partenaires (CDC §3.10 — Page Partenaires)
+ * Stockés dans public/images/partenaires/
+ */
+export interface PartnerLogo {
+  name: string;
+  logo: string;
+  url?: string;
+}
+
+export const PARTNERS_INSTITUTIONNELS: PartnerLogo[] = [
+  { name: 'Organisation Internationale de la Francophonie', logo: '/images/partenaires/oif.jpg', url: 'https://www.francophonie.org' },
+  { name: 'Union Africaine', logo: '/images/partenaires/union-africaine.webp', url: 'https://au.int' },
+  { name: 'CEMAC', logo: '/images/partenaires/cemac.webp' },
+  { name: 'Agence de Promotion des PME', logo: '/images/partenaires/agence-promotion-pme.webp' },
+];
+
+export const PARTNERS_FINANCIERS: PartnerLogo[] = [
+  { name: 'Banque Africaine de Développement', logo: '/images/partenaires/banque-africaine-developpement.webp', url: 'https://www.afdb.org' },
+  { name: 'AfricInvest', logo: '/images/partenaires/africinvest.jpeg', url: 'https://www.africinvest.com' },
+  { name: 'Partech Africa', logo: '/images/partenaires/partech-africa.jpeg', url: 'https://partechpartners.com' },
+  { name: 'Janngo Capital', logo: '/images/partenaires/janngo-capital.jpg', url: 'https://janngo.capital' },
+];
+
+export const PARTNERS_ACADEMIQUES: PartnerLogo[] = [
+  { name: 'Université de Yaoundé I', logo: '/images/partenaires/universite-yaounde-1.jpg' },
+  { name: 'Université de Yaoundé II', logo: '/images/partenaires/universite-yaounde-2.gif' },
+  { name: 'École Polytechnique de Yaoundé', logo: '/images/partenaires/polytechnique-yaounde.jpg' },
+  { name: 'Université de Douala', logo: '/images/partenaires/universite-douala.jpg' },
+];
+
+export const PARTNERS_CORPORATIFS: PartnerLogo[] = [
+  { name: 'Orange Digital Center', logo: '/images/partenaires/orange-digital-center.webp', url: 'https://orangedigitalcenters.com' },
+  { name: 'MTN Foundation', logo: '/images/partenaires/mtn-foundation.jpg', url: 'https://www.mtn.com' },
+  { name: 'Ecobank', logo: '/images/partenaires/ecobank.webp', url: 'https://ecobank.com' },
+  { name: 'Société Générale Cameroun', logo: '/images/partenaires/societe-generale-cameroun.webp' },
+  { name: 'TotalEnergies', logo: '/images/partenaires/totalenergies.jpg', url: 'https://totalenergies.com' },
+];
+
+/**
+ * Logos partenaires affichés sur la homepage (bandeau "Ils nous font confiance").
+ * Sélection des plus prestigieux pour maximiser la crédibilité.
+ */
+export const HOMEPAGE_PARTNERS: PartnerLogo[] = [
+  PARTNERS_INSTITUTIONNELS[0], // OIF
+  PARTNERS_INSTITUTIONNELS[1], // Union Africaine
+  PARTNERS_FINANCIERS[0],      // BAD
+  PARTNERS_CORPORATIFS[0],     // Orange Digital Center
+  PARTNERS_ACADEMIQUES[0],     // Univ Yaoundé I
+  PARTNERS_CORPORATIFS[1],     // MTN Foundation
+];
+
+/**
+ * Catégories de blog (Textes_Site_v1 §11)
+ */
+export type ArticleCategory = 'Annonces' | 'Portraits' | 'Ressources' | 'Événements' | 'Opinions';
+
+export const ARTICLE_CATEGORIES: ReadonlyArray<'Toutes' | ArticleCategory> = [
+  'Toutes',
+  'Annonces',
+  'Portraits',
+  'Ressources',
+  'Événements',
+  'Opinions',
+];
+
+export const ARTICLE_CATEGORY_COLORS: Record<ArticleCategory, string> = {
+  Annonces: 'bg-cauris-orange/10 text-cauris-orange',
+  Portraits: 'bg-pink-100 text-pink-700',
+  Ressources: 'bg-cauris-success/10 text-cauris-success',
+  Événements: 'bg-purple-100 text-purple-700',
+  Opinions: 'bg-blue-100 text-blue-700',
+};
+
+/**
+ * Structure d'un article (Textes_Site_v1 §11 — Modèle d'article type)
+ */
+export interface Article {
+  slug: string;
+  title: string;
+  excerpt: string; // Méta description / Extrait (max ~160 caractères)
+  category: ArticleCategory;
+  date: string; // ISO YYYY-MM-DD
+  author: string;
+  readingTime: number; // minutes
+  image: string;
+  imageCaption?: string;
+  /** Contenu de l'article structuré en paragraphes et sections */
+  content: ArticleSection[];
+}
+
+export interface ArticleSection {
+  type: 'paragraph' | 'h2' | 'h3' | 'quote' | 'list';
+  text?: string;
+  items?: string[];
+  citation?: string;
+}
+
+/**
+ * Articles du blog (placeholders — à remplacer via CMS)
+ * Structure conforme au modèle d'article du doc Textes_Site_v1 §11 :
+ *  - Introduction (50-100 mots)
+ *  - Corps : 3-5 sections H2/H3 (400-800 mots)
+ *  - Conclusion + CTA (50-100 mots)
+ */
+export const ARTICLES: ReadonlyArray<Article> = [
+  {
+    slug: 'amina-farmtrack-portrait',
+    title: 'Amina a transformé une idée en startup qui fait 50K FCFA/mois en 6 mois',
+    excerpt:
+      '73% des startups africaines échouent en moins d\'un an. Amina N. ne fait pas partie de ces statistiques — voici son parcours.',
+    category: 'Portraits',
+    date: '2026-04-15',
+    author: 'Équipe CAURIS DIGITAL',
+    readingTime: 6,
+    image: '/images/entrepreneurs/femme-entrepreneure-portrait.jpg',
+    imageCaption: 'Entrepreneure tech, fondatrice de FarmTrack — placeholder à remplacer par la vraie photo.',
+    content: [
+      {
+        type: 'paragraph',
+        text: '73% des startups africaines échouent en moins d\'un an. Amina N. ne fait pas partie de ces statistiques — et son parcours dans le programme Incubation peut inspirer toute une génération de fondateurs africains qui doutent.',
+      },
+      {
+        type: 'h2',
+        text: 'D\'une idée floue à un produit que les clients paient',
+      },
+      {
+        type: 'paragraph',
+        text: 'En septembre 2024, Amina rejoint la promotion de notre programme Incubation avec un constat simple : les petits producteurs de cacao de la région du Centre n\'ont aucun moyen de prouver l\'origine de leurs récoltes aux acheteurs internationaux. Une opportunité de plusieurs millions de FCFA leur échappe chaque année.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Pendant les deux premiers mois, Amina passe ses semaines en immersion terrain. Elle interviewe 47 coopératives, comprend leur quotidien, identifie les vrais points de friction. C\'est cette phase de validation — souvent négligée — qui fera toute la différence.',
+      },
+      {
+        type: 'h2',
+        text: 'Le pivot décisif au mois 3',
+      },
+      {
+        type: 'paragraph',
+        text: 'Sa première idée — une app mobile pour les producteurs — se heurte à la réalité : 60% des producteurs n\'ont pas de smartphone. Avec son mentor sectoriel, elle pivote vers un modèle hybride : SMS pour les producteurs, dashboard web pour les coopératives, certificats blockchain pour les acheteurs.',
+      },
+      {
+        type: 'quote',
+        text: 'Sans le feedback brutal mais bienveillant de mon mentor, j\'aurais persisté pendant 6 mois sur la mauvaise piste. C\'est ça la vraie valeur d\'un programme comme CAURIS DIGITAL.',
+        citation: 'Amina N., fondatrice de FarmTrack',
+      },
+      {
+        type: 'h2',
+        text: 'Les premiers revenus',
+      },
+      {
+        type: 'paragraph',
+        text: 'Au mois 5, Amina signe son premier contrat : 3 coopératives s\'abonnent au service pour 15 000 FCFA/mois chacune. Au mois 6, le chiffre passe à 12 coopératives. Aujourd\'hui, FarmTrack génère 50 000 FCFA par mois en récurrent et négocie un partenariat avec un acheteur européen.',
+      },
+      {
+        type: 'h3',
+        text: 'Les chiffres clés de FarmTrack',
+      },
+      {
+        type: 'list',
+        items: [
+          '12 coopératives clientes payantes',
+          '1 200 producteurs tracés sur la plateforme',
+          '50 000 FCFA/mois de chiffre d\'affaires récurrent',
+          '1 partenariat en négociation avec un acheteur européen',
+        ],
+      },
+      {
+        type: 'h2',
+        text: 'Et après ?',
+      },
+      {
+        type: 'paragraph',
+        text: 'Amina vient de candidater au programme Accélération pour franchir le palier suivant : passer de 12 à 100 coopératives en 12 semaines. Une trajectoire que beaucoup pensent réservée aux startups de la Silicon Valley. À CAURIS DIGITAL, nous prouvons chaque jour que l\'Afrique a ses propres champions.',
+      },
+    ],
+  },
+  {
+    slug: 'candidatures-promo-2026',
+    title: 'Les candidatures pour la Promotion 2026 du programme Incubation sont ouvertes',
+    excerpt:
+      'Du 1er mai au 30 juin 2026, déposez votre dossier pour rejoindre les 12 startups de notre prochaine cohorte.',
+    category: 'Annonces',
+    date: '2026-05-01',
+    author: 'Équipe CAURIS DIGITAL',
+    readingTime: 4,
+    image: '/images/entrepreneurs/equipe-jeunes-africains-bureau.webp',
+    content: [
+      {
+        type: 'paragraph',
+        text: 'C\'est officiel : la prochaine session du programme Incubation de CAURIS DIGITAL ouvre ses candidatures aujourd\'hui. 12 places. 6 mois d\'accompagnement intensif. Une opportunité unique pour transformer votre idée en startup viable.',
+      },
+      {
+        type: 'h2',
+        text: 'Ce qu\'on cherche cette année',
+      },
+      {
+        type: 'paragraph',
+        text: 'Pour la promo 2026, nous mettons un focus particulier sur cinq secteurs prioritaires : Agritech, Fintech, Edtech, Healthtech et Smart Cities. Les projets en phase d\'idéation ou de prototypage sont les bienvenus — pas besoin d\'avoir déjà un produit fini.',
+      },
+      {
+        type: 'h2',
+        text: 'Comment candidater ?',
+      },
+      {
+        type: 'list',
+        items: [
+          'Remplissez le formulaire en ligne (15 minutes environ)',
+          'Joignez un pitch deck ou présentation de votre projet (facultatif mais recommandé)',
+          'Décrivez votre équipe et votre engagement temps plein sur 6 mois',
+          'Date limite : 30 juin 2026 à 23h59 GMT+1',
+        ],
+      },
+      {
+        type: 'h2',
+        text: 'Le processus de sélection',
+      },
+      {
+        type: 'paragraph',
+        text: 'Toutes les candidatures sont examinées dans les 2 semaines suivant la clôture. Les dossiers retenus sont contactés pour un entretien de 30 minutes. Les résultats finaux sont annoncés au plus tard 4 semaines après la clôture.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Le programme démarre le 15 septembre 2026 par une journée d\'orientation à Yaoundé (et en ligne pour les participants à distance). Ne tardez pas — les meilleures candidatures sont souvent les premières arrivées.',
+      },
+    ],
+  },
+  {
+    slug: 'guide-pitch-deck-startup',
+    title: 'Le guide ultime du pitch deck pour startups tech africaines',
+    excerpt:
+      'Structure, narratif, financials, design : tout ce que vous devez savoir pour construire un pitch deck qui convainc.',
+    category: 'Ressources',
+    date: '2026-03-22',
+    author: 'Équipe CAURIS DIGITAL',
+    readingTime: 12,
+    image: '/images/entrepreneurs/entrepreneur-bureau.jpg',
+    content: [
+      {
+        type: 'paragraph',
+        text: 'Un pitch deck convaincant peut faire la différence entre une levée de fonds réussie et un projet qui reste dans les cartons. Pourtant, beaucoup de fondateurs africains commettent les mêmes erreurs : trop de texte, pas assez de chiffres, narratif confus.',
+      },
+      {
+        type: 'h2',
+        text: 'La structure recommandée',
+      },
+      {
+        type: 'paragraph',
+        text: 'Un bon pitch deck contient entre 10 et 15 slides. Pas plus. Voici la structure que nous recommandons à toutes les startups de notre programme :',
+      },
+      {
+        type: 'list',
+        items: [
+          'Slide 1 — Cover : nom de la startup, baseline, logo',
+          'Slide 2 — Problème : le pain point que vous résolvez',
+          'Slide 3 — Solution : votre produit en 1 phrase',
+          'Slide 4 — Marché : taille du marché, croissance',
+          'Slide 5 — Traction : utilisateurs, revenus, croissance',
+          'Slide 6 — Business model : comment vous gagnez de l\'argent',
+          'Slide 7 — Concurrence : qui est sur le marché, votre différenciation',
+          'Slide 8 — Équipe : pourquoi vous êtes les bonnes personnes',
+          'Slide 9 — Roadmap : où vous allez dans 12-24 mois',
+          'Slide 10 — Ask : combien vous levez et pour quoi',
+        ],
+      },
+      {
+        type: 'h2',
+        text: 'Les erreurs à éviter',
+      },
+      {
+        type: 'paragraph',
+        text: 'Trop de texte : aucun investisseur ne lit 200 mots par slide. Visez 30 mots maximum, et appuyez-vous sur des visuels forts. Chiffres flous : si vous écrivez "marché énorme", vous avez perdu. Donnez des chiffres précis avec leur source.',
+      },
+      {
+        type: 'h2',
+        text: 'Adapter au contexte africain',
+      },
+      {
+        type: 'paragraph',
+        text: 'Un investisseur basé à Paris ou New York ne connaît pas toujours les spécificités du marché africain. Anticipez les questions : pénétration mobile, taux de bancarisation, infrastructures télécom. Citez vos sources (BAD, Banque Mondiale, GSMA).',
+      },
+      {
+        type: 'quote',
+        text: 'Les meilleurs decks que je vois racontent une histoire — pas une suite de slides. Le narratif doit être limpide en 3 minutes.',
+        citation: 'Investisseur partenaire de CAURIS DIGITAL',
+      },
+    ],
+  },
+  {
+    slug: 'fintech-afrique-tendances-2026',
+    title: 'Fintech Afrique : les 5 tendances qui vont marquer 2026',
+    excerpt:
+      'Mobile money, embedded finance, crypto, scoring alternatif, banque verte : analyse des modèles qui décollent.',
+    category: 'Opinions',
+    date: '2026-02-10',
+    author: 'Équipe CAURIS DIGITAL',
+    readingTime: 9,
+    image: '/images/entrepreneurs/entrepreneur-portrait.jpg',
+    content: [
+      {
+        type: 'paragraph',
+        text: 'La fintech africaine attire plus de capitaux que jamais. Mais derrière le buzz, certains modèles décollent vraiment, d\'autres s\'essoufflent. Notre analyse des cinq tendances qui marqueront 2026.',
+      },
+      {
+        type: 'h2',
+        text: '1. Embedded finance — la finance partout',
+      },
+      {
+        type: 'paragraph',
+        text: 'Les services financiers s\'intègrent directement dans les apps non-financières : e-commerce, mobilité, agritech. Plutôt qu\'aller à la banque, le crédit vient à vous via votre app de livraison ou votre coopérative agricole. Une révolution silencieuse mais structurelle.',
+      },
+      {
+        type: 'h2',
+        text: '2. Scoring alternatif — au-delà du CV bancaire',
+      },
+      {
+        type: 'paragraph',
+        text: 'Avec 60% d\'adultes non-bancarisés en Afrique, les modèles classiques de scoring sont inopérants. Les nouvelles startups exploitent les données alternatives : historique mobile money, comportement social, données satellite pour l\'agriculture.',
+      },
+      {
+        type: 'h2',
+        text: '3. Crypto — passé la hype, l\'utilité réelle',
+      },
+      {
+        type: 'paragraph',
+        text: 'Après les excès de 2021-2022, les usages crypto utiles émergent : transferts transfrontaliers à bas coût, stablecoins comme alternative aux monnaies locales volatiles, financement participatif décentralisé. La régulation reste le principal frein.',
+      },
+      {
+        type: 'h2',
+        text: '4. Banque verte — financer la transition',
+      },
+      {
+        type: 'paragraph',
+        text: 'L\'Afrique sera le continent le plus impacté par le changement climatique. Les fintechs vertes financent l\'agriculture résiliente, l\'énergie solaire, l\'efficacité énergétique. Un marché de plusieurs milliards qui ne fait que commencer.',
+      },
+      {
+        type: 'h2',
+        text: '5. Souveraineté technologique',
+      },
+      {
+        type: 'paragraph',
+        text: 'Les banques centrales africaines accélèrent sur les CBDC (monnaies numériques de banque centrale). Le e-CFA est en test au Sénégal, le e-Naira en circulation au Nigeria. Une bataille stratégique pour la souveraineté monétaire du continent.',
+      },
+    ],
+  },
+  {
+    slug: 'demo-day-2025-recap',
+    title: 'Demo Day 2025 : les 12 startups qui ont marqué l\'édition',
+    excerpt:
+      'Retour sur la promo 2025 du programme Incubation : 12 pitchs, 250 participants, 8 partenariats, 1,2M€ en intentions d\'investissement.',
+    category: 'Événements',
+    date: '2025-12-05',
+    author: 'Équipe CAURIS DIGITAL',
+    readingTime: 7,
+    image: '/images/entrepreneurs/entrepreneur-succes.png',
+    content: [
+      {
+        type: 'paragraph',
+        text: 'Le Demo Day 2025 a tenu toutes ses promesses : une salle comble à l\'Hôtel Hilton de Yaoundé, 250 participants, 12 startups sur scène et un total de 1,2M€ en intentions d\'investissement annoncées. Récap.',
+      },
+      {
+        type: 'h2',
+        text: 'Les chiffres-clés de l\'édition',
+      },
+      {
+        type: 'list',
+        items: [
+          '12 startups diplômées sur scène',
+          '250 participants : investisseurs, corporates, médias, alumni',
+          '8 partenariats signés sur place',
+          '1,2M€ en intentions d\'investissement annoncées',
+          '32 pays représentés dans le public (en ligne et présentiel)',
+        ],
+      },
+      {
+        type: 'h2',
+        text: 'Les startups qui ont fait sensation',
+      },
+      {
+        type: 'paragraph',
+        text: 'Trois startups se sont particulièrement démarquées. FarmTrack a annoncé son premier contrat avec un acheteur européen pendant le Demo Day même. PayEasy a levé 200K€ en seed round. TaxiSafe a signé un partenariat avec une grande compagnie de taxi camerounaise.',
+      },
+      {
+        type: 'h2',
+        text: 'Et maintenant ?',
+      },
+      {
+        type: 'paragraph',
+        text: 'Toutes les startups de la promo 2025 entrent dans notre réseau Alumni. Elles bénéficient d\'un suivi de 3 mois post-programme et d\'un accès à vie à notre communauté. Plusieurs ont déjà candidaté au programme Accélération pour franchir le palier suivant.',
+      },
+    ],
+  },
+  {
+    slug: 'femmes-entrepreneures-afrique',
+    title: 'Femmes entrepreneures : pourquoi nous doublons leur représentation en 2026',
+    excerpt:
+      'L\'Afrique est le continent où les femmes entreprennent le plus — mais où elles peinent le plus à lever des fonds. Notre engagement.',
+    category: 'Annonces',
+    date: '2026-03-08',
+    author: 'Équipe CAURIS DIGITAL',
+    readingTime: 5,
+    image: '/images/entrepreneurs/femme-dirigeante-bras-croises.avif',
+    content: [
+      {
+        type: 'paragraph',
+        text: 'À l\'occasion de la Journée internationale des droits des femmes, nous prenons un engagement public : doubler la représentation féminine dans nos promotions d\'ici 2027. Voici pourquoi et comment.',
+      },
+      {
+        type: 'h2',
+        text: 'Un paradoxe africain',
+      },
+      {
+        type: 'paragraph',
+        text: 'L\'Afrique subsaharienne est la région du monde où le taux de femmes entrepreneures est le plus élevé (26% selon le GEM). Pourtant, c\'est aussi la région où elles reçoivent le moins de financements : moins de 5% des fonds levés en capital-risque vont à des startups dirigées par des femmes.',
+      },
+      {
+        type: 'h2',
+        text: 'Nos engagements concrets',
+      },
+      {
+        type: 'list',
+        items: [
+          'Atteindre 50% de femmes fondatrices dans la promo 2027',
+          'Lancer un programme de mentorat dédié aux femmes entrepreneures',
+          'Créer un réseau d\'alumnae actives dans la mise en relation',
+          'Sensibiliser nos partenaires investisseurs à l\'investissement responsable',
+          'Publier nos chiffres de diversité chaque trimestre en toute transparence',
+        ],
+      },
+      {
+        type: 'quote',
+        text: 'L\'innovation africaine ne peut être complète qu\'en s\'appuyant sur tous ses talents. Exclure les femmes, c\'est exclure la moitié du potentiel.',
+        citation: 'Direction CAURIS DIGITAL',
+      },
+      {
+        type: 'h2',
+        text: 'Comment vous pouvez agir',
+      },
+      {
+        type: 'paragraph',
+        text: 'Vous êtes femme entrepreneure et avez un projet tech ? Candidatez à notre programme Incubation. Vous êtes mentor ou investisseur ? Rejoignez notre réseau et engagez-vous à parrainer au moins une femme fondatrice. Vous êtes une entreprise partenaire ? Demandez-nous nos critères de diversité dans nos sélections.',
+      },
+    ],
+  },
+];
+
+/**
+ * Helper : récupère un article par son slug.
+ */
+export function getArticleBySlug(slug: string): Article | undefined {
+  return ARTICLES.find((a) => a.slug === slug);
+}
+
+/**
+ * Helper : récupère des articles liés (même catégorie, hors article courant).
+ */
+export function getRelatedArticles(currentSlug: string, limit = 3): Article[] {
+  const current = getArticleBySlug(currentSlug);
+  if (!current) return [];
+  return ARTICLES.filter((a) => a.slug !== currentSlug && a.category === current.category).slice(
+    0,
+    limit,
+  );
+}
