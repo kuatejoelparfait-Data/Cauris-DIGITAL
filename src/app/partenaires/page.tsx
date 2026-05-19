@@ -1,9 +1,16 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { ArrowRight, ExternalLink, Building2, Banknote, GraduationCap, Briefcase } from 'lucide-react';
-import Button from '@/components/ui/Button';
 import SectionTitle from '@/components/ui/SectionTitle';
 import Reveal from '@/components/ui/Reveal';
-import { PARTNER_CATEGORIES } from '@/lib/constants';
+import {
+  PARTNER_CATEGORIES,
+  PARTNERS_INSTITUTIONNELS,
+  PARTNERS_FINANCIERS,
+  PARTNERS_ACADEMIQUES,
+  PARTNERS_CORPORATIFS,
+  type PartnerLogo,
+} from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: 'Nos partenaires — CAURIS DIGITAL | Écosystème tech africain',
@@ -11,38 +18,11 @@ export const metadata: Metadata = {
     'Découvrez les partenaires institutionnels, financiers, académiques et corporatifs qui soutiennent la mission de CAURIS DIGITAL en Afrique francophone.',
 };
 
-/**
- * Logos partenaires (placeholders - à remplacer par les vrais logos via CMS)
- * Pour l'instant on affiche le nom typographique en attendant les SVG.
- */
-const PARTNERS_BY_CATEGORY: Record<string, Array<{ name: string; url?: string }>> = {
-  institutionnels: [
-    { name: 'Organisation Internationale de la Francophonie' },
-    { name: 'Union Africaine' },
-    { name: 'CEMAC' },
-    { name: 'Ministère de l\'Économie Numérique' },
-    { name: 'Agence de Promotion des PME' },
-  ],
-  financiers: [
-    { name: 'Banque Africaine de Développement' },
-    { name: 'Proparco' },
-    { name: 'AfricInvest' },
-    { name: 'Partech Africa' },
-    { name: 'Janngo Capital' },
-  ],
-  academiques: [
-    { name: 'Université de Yaoundé I' },
-    { name: 'Université de Yaoundé II' },
-    { name: 'École Polytechnique de Yaoundé' },
-    { name: 'Université de Douala' },
-  ],
-  corporatifs: [
-    { name: 'Orange Digital Center' },
-    { name: 'MTN Foundation' },
-    { name: 'Ecobank' },
-    { name: 'Société Générale Cameroun' },
-    { name: 'Total Energies' },
-  ],
+const PARTNERS_BY_CATEGORY: Record<string, PartnerLogo[]> = {
+  institutionnels: PARTNERS_INSTITUTIONNELS,
+  financiers: PARTNERS_FINANCIERS,
+  academiques: PARTNERS_ACADEMIQUES,
+  corporatifs: PARTNERS_CORPORATIFS,
 };
 
 const CATEGORY_ICONS = {
@@ -103,33 +83,54 @@ export default function PartnersPage() {
 
                 <Reveal delay={150} className="lg:col-span-2">
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
-                    {partners.map((partner) => (
-                      <div
-                        key={partner.name}
-                        className="card bg-white p-5 border border-gray-100 flex items-center justify-center min-h-[120px] text-center hover:border-cauris-orange/30 transition-colors group"
-                      >
-                        {partner.url ? (
-                          <a
-                            href={partner.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-sm font-heading font-semibold text-cauris-gray-text group-hover:text-cauris-orange transition-colors flex items-center gap-1"
-                          >
-                            {partner.name}
-                            <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden="true" />
-                          </a>
-                        ) : (
-                          <span className="text-sm font-heading font-semibold text-cauris-gray-text leading-snug">
-                            {partner.name}
-                          </span>
-                        )}
-                      </div>
-                    ))}
+                    {partners.map((partner) => {
+                      const inner = (
+                        <div className="relative w-full h-20 flex items-center justify-center">
+                          <Image
+                            src={partner.logo}
+                            alt={partner.name}
+                            width={180}
+                            height={80}
+                            className="max-h-16 max-w-full object-contain transition-transform group-hover:scale-105"
+                            unoptimized
+                          />
+                        </div>
+                      );
+                      return (
+                        <div
+                          key={partner.name}
+                          className="card bg-white p-5 border border-gray-100 flex flex-col items-center justify-center min-h-[140px] text-center hover:border-cauris-orange/30 transition-colors group"
+                          title={partner.name}
+                        >
+                          {partner.url ? (
+                            <a
+                              href={partner.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="block w-full"
+                              aria-label={`Visiter le site de ${partner.name}`}
+                            >
+                              {inner}
+                              <span className="inline-flex items-center gap-1 mt-3 text-[11px] text-cauris-gray-secondary group-hover:text-cauris-orange transition-colors">
+                                {partner.name}
+                                <ExternalLink
+                                  className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity"
+                                  aria-hidden="true"
+                                />
+                              </span>
+                            </a>
+                          ) : (
+                            <>
+                              {inner}
+                              <span className="mt-3 text-[11px] text-cauris-gray-secondary">
+                                {partner.name}
+                              </span>
+                            </>
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
-                  <p className="mt-5 text-xs text-cauris-gray-secondary italic">
-                    Note : les logos officiels seront ajoutés au fur et à mesure des partenariats
-                    signés. Cette liste est mise à jour via le CMS.
-                  </p>
                 </Reveal>
               </div>
             </div>
