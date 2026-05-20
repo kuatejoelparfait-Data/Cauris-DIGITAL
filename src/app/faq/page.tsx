@@ -36,14 +36,38 @@ export default function FAQPage() {
       {/* Liste des thèmes + accordéons */}
       <section className="section">
         <div className="container-cauris">
+          {/* Navigation thèmes en chips horizontales (mobile/tablet) — visible jusqu'à lg */}
+          <nav
+            aria-label="Navigation FAQ par thème (mobile)"
+            className="lg:hidden mb-10 -mx-4 sm:mx-0 px-4 sm:px-0"
+          >
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-cauris-gray-secondary mb-3">
+              Thèmes
+            </p>
+            <div className="flex gap-2 overflow-x-auto pb-2 -mb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+              {FAQ_ITEMS.map((theme, i) => (
+                <a
+                  key={theme.theme}
+                  href={`#theme-${i}`}
+                  className="shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cauris-cream text-sm text-cauris-gray-text hover:bg-cauris-orange/10 hover:text-cauris-orange transition-colors whitespace-nowrap"
+                >
+                  <span className="w-5 h-5 rounded-full bg-cauris-orange text-white text-[10px] font-bold flex items-center justify-center">
+                    {i + 1}
+                  </span>
+                  {theme.theme}
+                </a>
+              ))}
+            </div>
+          </nav>
+
           <div className="grid lg:grid-cols-4 gap-12 max-w-6xl mx-auto">
-            {/* Sommaire latéral (sticky) */}
-            <aside className="lg:col-span-1">
+            {/* Sommaire latéral (sticky) — uniquement sur lg+ */}
+            <aside className="hidden lg:block lg:col-span-1">
               <div className="lg:sticky lg:top-28">
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-cauris-gray-secondary mb-4">
                   Thèmes
                 </p>
-                <nav aria-label="Navigation FAQ par thème">
+                <nav aria-label="Navigation FAQ par thème (desktop)">
                   <ul className="space-y-2">
                     {FAQ_ITEMS.map((theme, i) => (
                       <li key={theme.theme}>

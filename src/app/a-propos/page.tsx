@@ -232,7 +232,7 @@ export default function AboutPage() {
             description="Des professionnels qui ont eux-mêmes entrepris, construit, raté et réussi — avant de se mettre au service des autres."
           />
 
-          <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+          <div className="mt-14 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
             {TEAM.map((member, i) => (
               <Reveal key={`${member.name}-${i}`} delay={i * 80}>
                 <article className="group">

@@ -91,7 +91,7 @@ export default function AccelerationProgramPage() {
               <p className="mb-3 text-[13px] font-semibold uppercase tracking-[0.18em] text-cauris-orange">
                 Pour startups en croissance
               </p>
-              <h1 className="font-heading font-extrabold text-4xl sm:text-5xl lg:text-6xl leading-[1.05] text-cauris-black mb-6">
+              <h1 className="font-heading font-extrabold text-3xl xs:text-4xl sm:text-5xl lg:text-6xl leading-[1.05] text-cauris-black mb-6 break-words">
                 Programme Accélération
               </h1>
               <p className="text-lg text-cauris-gray-text leading-relaxed mb-8">

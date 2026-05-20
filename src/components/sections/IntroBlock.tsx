@@ -1,6 +1,7 @@
 import { ArrowRight } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import Reveal from '@/components/ui/Reveal';
+import { BRAND_IMAGES } from '@/lib/constants';
 
 /**
  * Bloc présentation (CDC §2.1).
@@ -47,46 +48,47 @@ export default function IntroBlock() {
 
           <Reveal delay={150}>
             <div className="relative">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-4">
+              <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                <div className="space-y-3 sm:space-y-4">
                   <div className="aspect-[3/4] rounded-card overflow-hidden shadow-card bg-cauris-orange/10">
                     <img
-                      src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=600&q=80"
-                      alt="Entrepreneure africaine en pitch"
+                      src={BRAND_IMAGES.introPitch}
+                      alt="Entrepreneure africaine présentant son pitch"
                       className="w-full h-full object-cover"
                       loading="lazy"
                     />
                   </div>
                   <div className="aspect-square rounded-card overflow-hidden shadow-card bg-cauris-cream">
                     <img
-                      src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80"
-                      alt="Session de mentorat"
+                      src={BRAND_IMAGES.introMentoring}
+                      alt="Session de mentorat avec une entrepreneure africaine"
                       className="w-full h-full object-cover"
                       loading="lazy"
                     />
                   </div>
                 </div>
-                <div className="space-y-4 pt-12">
+                {/* Décalage uniquement sur sm+ pour l'effet mosaïque, droit sur mobile */}
+                <div className="space-y-3 sm:space-y-4 sm:pt-12">
                   <div className="aspect-square rounded-card overflow-hidden shadow-card bg-cauris-black">
                     <img
-                      src="https://images.unsplash.com/photo-1604881991720-f91add269bed?w=600&q=80"
-                      alt="Coworking moderne"
+                      src={BRAND_IMAGES.introCoworking}
+                      alt="Atelier collectif au sein de l'écosystème CAURIS DIGITAL"
                       className="w-full h-full object-cover"
                       loading="lazy"
                     />
                   </div>
                   <div className="aspect-[3/4] rounded-card overflow-hidden shadow-card bg-cauris-orange">
                     <img
-                      src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&q=80"
-                      alt="Tableau blanc workshop"
+                      src={BRAND_IMAGES.introWorkshop}
+                      alt="Entrepreneurs africains en session de travail collaboratif"
                       className="w-full h-full object-cover"
                       loading="lazy"
                     />
                   </div>
                 </div>
               </div>
-              {/* Badge */}
-              <div className="absolute -bottom-4 -left-4 bg-white rounded-card shadow-card-hover px-5 py-4 border border-gray-100 max-w-[200px]">
+              {/* Badge +80 — inline sous la mosaïque sur mobile, en superposition sur sm+ */}
+              <div className="mt-4 sm:mt-0 sm:absolute sm:-bottom-4 sm:-left-4 bg-white rounded-card shadow-card-hover px-5 py-4 border border-gray-100 max-w-full sm:max-w-[200px] flex items-baseline sm:block gap-3">
                 <p className="text-2xl font-heading font-bold text-cauris-orange">+80</p>
                 <p className="text-xs text-cauris-gray-secondary">startups accompagnées par an</p>
               </div>

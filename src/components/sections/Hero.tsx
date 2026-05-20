@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { ArrowRight, Play } from 'lucide-react';
 import Button from '@/components/ui/Button';
+import { BRAND_IMAGES } from '@/lib/constants';
 
 /**
  * Hero homepage (CDC §2.1).
@@ -12,7 +13,7 @@ export default function Hero() {
       {/* Image de fond */}
       <div className="absolute inset-0">
         <Image
-          src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1920&q=80"
+          src={BRAND_IMAGES.heroBackground}
           alt="Entrepreneurs africains au travail dans un espace de coworking moderne"
           fill
           priority
@@ -42,16 +43,30 @@ export default function Hero() {
             Basé à Yaoundé, actif partout dans le monde.
           </p>
 
-          <div className="flex flex-wrap items-center gap-4">
-            <Button href="/contact?objet=candidature" size="lg">
+          {/* CTA — sur mobile, primaire en évidence + secondaire en lien texte ; sur desktop, deux boutons côte à côte */}
+          <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-3 sm:gap-4">
+            <Button
+              href="/contact?objet=candidature"
+              size="lg"
+              className="w-full sm:w-auto justify-center"
+            >
               Déposer ma candidature
               <ArrowRight className="w-4 h-4" />
             </Button>
+
+            {/* Mobile : lien texte discret. Desktop (sm+) : bouton secondaire complet */}
+            <a
+              href="#programmes"
+              className="sm:hidden inline-flex items-center gap-2 self-start mt-1 px-2 py-2 text-sm text-white/85 font-medium"
+            >
+              <Play className="w-4 h-4 text-cauris-orange" />
+              Découvrir nos programmes
+            </a>
             <Button
               href="#programmes"
               variant="secondary"
               size="lg"
-              className="text-white border-white/40 hover:bg-white hover:text-cauris-black"
+              className="hidden sm:inline-flex text-white border-white/40 hover:bg-white hover:text-cauris-black"
             >
               <Play className="w-4 h-4" />
               Découvrir nos programmes

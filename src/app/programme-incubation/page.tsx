@@ -113,7 +113,7 @@ export default function IncubationProgramPage() {
               <p className="mb-3 text-[13px] font-semibold uppercase tracking-[0.18em] text-cauris-orange">
                 Programme phare CAURIS DIGITAL
               </p>
-              <h1 className="font-heading font-extrabold text-4xl sm:text-5xl lg:text-6xl leading-[1.05] text-cauris-black mb-6">
+              <h1 className="font-heading font-extrabold text-3xl xs:text-4xl sm:text-5xl lg:text-6xl leading-[1.05] text-cauris-black mb-6 break-words">
                 Programme Incubation
               </h1>
               <p className="text-lg text-cauris-gray-text leading-relaxed mb-8">
@@ -385,11 +385,17 @@ export default function IncubationProgramPage() {
               Déposer ma candidature
               <ArrowRight className="w-4 h-4" />
             </Button>
-            <p className="mt-4 text-sm text-cauris-gray-secondary">
-              Trophée <Trophy className="inline w-4 h-4 text-cauris-orange" /> remis aux 12
-              startups sélectionnées · <Users className="inline w-4 h-4 text-cauris-orange" />{' '}
-              promotion limitée
-            </p>
+            <div className="mt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm text-cauris-gray-secondary">
+              <span className="inline-flex items-center gap-1.5">
+                <Trophy className="w-4 h-4 text-cauris-orange shrink-0" aria-hidden="true" />
+                Trophée remis aux 12 startups sélectionnées
+              </span>
+              <span className="hidden sm:inline" aria-hidden="true">·</span>
+              <span className="inline-flex items-center gap-1.5">
+                <Users className="w-4 h-4 text-cauris-orange shrink-0" aria-hidden="true" />
+                Promotion limitée
+              </span>
+            </div>
           </div>
         </div>
       </section>

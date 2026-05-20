@@ -34,14 +34,14 @@ export default function KeyNumbers() {
           </div>
         </Reveal>
 
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 sm:gap-x-6 gap-y-10 sm:gap-y-12">
           {NUMBERS.map((item, i) => (
             <Reveal key={item.label} delay={i * 80}>
               <div className="text-center group">
-                <p className="font-heading font-extrabold text-5xl sm:text-6xl lg:text-7xl text-gradient-orange mb-3 transition-transform group-hover:scale-105">
+                <p className="font-heading font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-gradient-orange mb-2 sm:mb-3 transition-transform group-hover:scale-105 break-words">
                   <CountUp end={item.end} prefix={item.prefix} suffix={item.suffix} />
                 </p>
-                <p className="text-sm sm:text-base text-white/70 max-w-[220px] mx-auto leading-snug">
+                <p className="text-xs sm:text-sm md:text-base text-white/70 max-w-[180px] sm:max-w-[220px] mx-auto leading-snug">
                   {item.label}
                 </p>
               </div>
