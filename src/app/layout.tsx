@@ -47,20 +47,13 @@ export const metadata: Metadata = {
     title: 'CAURIS DIGITAL — Incubateur numérique d\'excellence',
     description:
       'Où l\'innovation numérique africaine prend son essor. Programmes d\'incubation et d\'accélération.',
-    images: [
-      {
-        url: '/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'CAURIS DIGITAL',
-      },
-    ],
+    // L'image OG est générée dynamiquement par src/app/opengraph-image.tsx
   },
   twitter: {
     card: 'summary_large_image',
     title: 'CAURIS DIGITAL',
     description: 'Incubateur numérique d\'excellence en Afrique francophone.',
-    images: ['/og-image.jpg'],
+    // L'image Twitter est générée dynamiquement par src/app/twitter-image.tsx
   },
   robots: {
     index: true,
