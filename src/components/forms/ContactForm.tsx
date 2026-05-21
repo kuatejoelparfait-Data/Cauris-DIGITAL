@@ -2,7 +2,8 @@
 
 import { useState, type FormEvent } from 'react';
 import Link from 'next/link';
-import { Send, Check, AlertCircle, Loader2 } from 'lucide-react';
+import { Send, Check, AlertCircle, Loader2, ShieldCheck } from 'lucide-react';
+import { useRecaptcha } from '@/lib/hooks/useRecaptcha';
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
 
@@ -53,6 +54,7 @@ const COUNTRIES = [
 export default function ContactForm({ defaultSubject = '' }: { defaultSubject?: string }) {
   const [status, setStatus] = useState<Status>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+  const { getToken: getRecaptchaToken, isEnabled: recaptchaEnabled } = useRecaptcha();
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -67,7 +69,17 @@ export default function ContactForm({ defaultSubject = '' }: { defaultSubject?: 
       return;
     }
 
-    const payload = Object.fromEntries(formData.entries());
+    const payload: Record<string, FormDataEntryValue | string> = Object.fromEntries(
+      formData.entries(),
+    );
+
+    // Génère un token reCAPTCHA v3 si configuré (sinon null = mode dev)
+    if (recaptchaEnabled) {
+      const recaptchaToken = await getRecaptchaToken('contact_form');
+      if (recaptchaToken) {
+        payload.recaptchaToken = recaptchaToken;
+      }
+    }
 
     try {
       const res = await fetch('/api/contact', {
@@ -95,7 +107,7 @@ export default function ContactForm({ defaultSubject = '' }: { defaultSubject?: 
           Merci pour votre message !
         </h3>
         <p className="text-cauris-gray-text mb-2">
-          Notre équipe vous répondra dans les 48h ouvrées.
+          Notre équipe vous répondra dans les plus brefs délais.
         </p>
         <p className="text-sm text-cauris-gray-secondary">
           En attendant, découvrez{' '}
@@ -254,23 +266,53 @@ export default function ContactForm({ defaultSubject = '' }: { defaultSubject?: 
         </div>
       )}
 
-      <button
-        type="submit"
-        disabled={status === 'loading'}
-        className="btn-primary w-full sm:w-auto disabled:opacity-60"
-      >
-        {status === 'loading' ? (
-          <>
-            <Loader2 className="w-4 h-4 animate-spin" />
-            Envoi en cours…
-          </>
-        ) : (
-          <>
-            Envoyer le message
-            <Send className="w-4 h-4" />
-          </>
+      <div className="flex flex-col gap-3">
+        <button
+          type="submit"
+          disabled={status === 'loading'}
+          className="btn-primary w-full sm:w-auto disabled:opacity-60"
+        >
+          {status === 'loading' ? (
+            <>
+              <Loader2 className="w-4 h-4 animate-spin" />
+              Envoi en cours…
+            </>
+          ) : (
+            <>
+              Envoyer le message
+              <Send className="w-4 h-4" />
+            </>
+          )}
+        </button>
+
+        {/* Mention reCAPTCHA exigée par Google quand le badge est masqué */}
+        {recaptchaEnabled && (
+          <p className="text-[11px] text-cauris-gray-secondary leading-relaxed inline-flex items-start gap-1.5">
+            <ShieldCheck className="w-3 h-3 mt-0.5 shrink-0 text-cauris-gray-secondary" aria-hidden="true" />
+            <span>
+              Ce site est protégé par reCAPTCHA et respecte les{' '}
+              <a
+                href="https://policies.google.com/privacy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:text-cauris-orange"
+              >
+                Règles de confidentialité
+              </a>{' '}
+              et les{' '}
+              <a
+                href="https://policies.google.com/terms"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:text-cauris-orange"
+              >
+                Conditions d&apos;utilisation
+              </a>{' '}
+              de Google.
+            </span>
+          </p>
         )}
-      </button>
+      </div>
     </form>
   );
 }

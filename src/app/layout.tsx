@@ -4,6 +4,7 @@ import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import CookieBanner from '@/components/layout/CookieBanner';
+import RecaptchaScript from '@/components/layout/RecaptchaScript';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -88,6 +89,7 @@ export default function RootLayout({
         </main>
         <Footer />
         <CookieBanner />
+        <RecaptchaScript />
       </body>
     </html>
   );

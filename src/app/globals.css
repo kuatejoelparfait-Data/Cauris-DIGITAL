@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+/* reCAPTCHA v3 — masquer le badge par défaut.
+   Google autorise ce masquage si on affiche un texte de mention sur les formulaires,
+   ce qui est fait dans ContactForm.tsx (lien vers leurs CGU + politique). */
+.grecaptcha-badge {
+  visibility: hidden !important;
+}
+
 @layer base {
   :root {
     --color-cauris-orange: 232 100 10;
