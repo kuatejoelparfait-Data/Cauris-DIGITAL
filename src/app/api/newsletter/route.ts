@@ -143,7 +143,17 @@ export async function POST(request: Request) {
 
     if (emailError) {
       // L'inscription a réussi mais l'email de bienvenue a échoué — on log et on continue
-      console.error('[newsletter] Erreur email bienvenue:', emailError);
+      // Cas attendu tant qu'aucun domaine n'a été vérifié sur Resend : le mode test
+      // de Resend ne permet d'envoyer qu'à l'email du propriétaire du compte.
+      // Voir docs/SETUP_RESEND.md pour la procédure de vérification de domaine.
+      if (isResendTestModeRestriction(emailError)) {
+        console.warn(
+          `[newsletter] Email de bienvenue non envoyé à ${cleanEmail} ` +
+            `(mode test Resend — domaine non vérifié). L'inscription est bien prise en compte.`,
+        );
+      } else {
+        console.error('[newsletter] Erreur inattendue email bienvenue:', emailError);
+      }
     }
 
     console.log('[newsletter] Inscription réussie ✓', cleanEmail);
@@ -166,4 +176,26 @@ function escape(str: string): string {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;');
+}
+
+/**
+ * Détecte si l'erreur Resend correspond à la restriction du mode test
+ * (uniquement envoi vers l'email du propriétaire tant qu'aucun domaine n'est vérifié).
+ *
+ * Resend renvoie typiquement :
+ *  - statusCode: 403
+ *  - name: 'validation_error'
+ *  - message contenant "You can only send testing emails to your own email address"
+ */
+function isResendTestModeRestriction(err: unknown): boolean {
+  if (!err || typeof err !== 'object') return false;
+  const e = err as { statusCode?: number; name?: string; message?: string };
+  if (e.statusCode !== 403) return false;
+  if (e.name !== 'validation_error') return false;
+  const msg = String(e.message ?? '').toLowerCase();
+  return (
+    msg.includes('testing emails') ||
+    msg.includes('your own email') ||
+    msg.includes('verify a domain')
+  );
 }
