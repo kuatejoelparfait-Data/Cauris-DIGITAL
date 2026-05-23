@@ -36,7 +36,14 @@ export default function CookieBanner() {
       // ignore
     }
     setConsent(choice);
-    // Hook futur : déclencher / désactiver Google Analytics ici.
+
+    // Émet un event custom pour que GoogleAnalytics (et autres trackers
+    // RGPD-aware) puissent réagir au changement de consentement en temps réel.
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(
+        new CustomEvent('cauris-cookie-consent', { detail: { consent: choice } }),
+      );
+    }
   };
 
   // Ne rien rendre tant que le composant n'a pas hydraté

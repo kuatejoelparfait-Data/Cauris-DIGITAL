@@ -1,10 +1,12 @@
 import type { Metadata } from 'next';
 import { Inter, Montserrat } from 'next/font/google';
+import { Suspense } from 'react';
 import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import CookieBanner from '@/components/layout/CookieBanner';
 import RecaptchaScript from '@/components/layout/RecaptchaScript';
+import GoogleAnalytics from '@/components/layout/GoogleAnalytics';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -90,6 +92,10 @@ export default function RootLayout({
         <Footer />
         <CookieBanner />
         <RecaptchaScript />
+        {/* Suspense requis car GoogleAnalytics utilise useSearchParams (Next.js 14) */}
+        <Suspense fallback={null}>
+          <GoogleAnalytics />
+        </Suspense>
       </body>
     </html>
   );
