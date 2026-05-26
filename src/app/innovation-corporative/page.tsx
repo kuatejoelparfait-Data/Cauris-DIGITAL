@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import {
   ArrowRight,
   Search,
@@ -17,6 +18,7 @@ import {
 import Button from '@/components/ui/Button';
 import SectionTitle from '@/components/ui/SectionTitle';
 import Reveal from '@/components/ui/Reveal';
+import { BRAND_IMAGES } from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: 'Innovation Corporative — CAURIS DIGITAL | Co-innover avec les startups africaines',
@@ -268,12 +270,13 @@ export default function InnovationCorporativePage() {
             </Reveal>
 
             <Reveal delay={150}>
-              <div className="aspect-square rounded-card overflow-hidden shadow-card-hover">
-                <img
-                  src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=700&q=80"
-                  alt="Réunion de travail entre corporate et startups africaines"
-                  className="w-full h-full object-cover"
-                  loading="lazy"
+              <div className="relative aspect-square rounded-card overflow-hidden shadow-card-hover">
+                <Image
+                  src={BRAND_IMAGES.corporateMeeting}
+                  alt="Entrepreneurs africains en réunion stratégique avec un partenaire corporate"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
                 />
               </div>
             </Reveal>

@@ -78,6 +78,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" className={`${inter.variable} ${montserrat.variable}`}>
+      <head>
+        {/* Preconnect aux domaines externes pour réduire la latence */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://www.google.com" />
+        <link rel="dns-prefetch" href="https://www.gstatic.com" />
+      </head>
       <body className="min-h-screen flex flex-col bg-white">
         <a
           href="#main-content"

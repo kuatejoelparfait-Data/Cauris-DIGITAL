@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { Calendar, Clock, User } from 'lucide-react';
 import { ARTICLE_CATEGORY_COLORS, type Article } from '@/lib/constants';
@@ -27,14 +28,15 @@ export default function ArticleCard({ article, compact = false }: ArticleCardPro
       {!compact && (
         <Link
           href={`/actualites/${article.slug}`}
-          className="block overflow-hidden rounded-card mb-4 shadow-card group-hover:shadow-card-hover transition-shadow aspect-[16/10]"
+          className="relative block overflow-hidden rounded-card mb-4 shadow-card group-hover:shadow-card-hover transition-shadow aspect-[16/10]"
           aria-label={`Lire l'article : ${article.title}`}
         >
-          <img
+          <Image
             src={article.image}
             alt={`Illustration de l'article « ${article.title} »`}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-            loading="lazy"
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="object-cover group-hover:scale-105 transition-transform duration-500"
           />
         </Link>
       )}

@@ -1,123 +1,21 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import Link from 'next/link';
-import { ArrowRight, Calendar, Clock, Search, X, User } from 'lucide-react';
-
-type Category = 'Annonces' | 'Portraits' | 'Ressources' | 'Événements' | 'Opinions';
-
-interface Article {
-  slug: string;
-  title: string;
-  excerpt: string;
-  category: Category;
-  date: string; // ISO YYYY-MM-DD
-  author: string;
-  readingTime: number; // minutes
-  image: string;
-}
-
-/**
- * Articles d'exemple — à remplacer par CMS.
- */
-const ARTICLES: Article[] = [
-  {
-    slug: 'amina-farmtrack-portrait',
-    title: 'Amina a transformé une idée en startup qui fait 50K FCFA/mois en 6 mois',
-    excerpt:
-      '73% des startups africaines échouent en moins d\'un an. Amina N. ne fait pas partie de ces statistiques — et voici pourquoi son parcours dans le programme Incubation peut inspirer toute une génération.',
-    category: 'Portraits',
-    date: '2026-04-15',
-    author: 'Équipe CAURIS DIGITAL',
-    readingTime: 6,
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80',
-  },
-  {
-    slug: 'candidatures-promo-2026',
-    title: 'Les candidatures pour la Promotion 2026 du programme Incubation sont ouvertes',
-    excerpt:
-      'Du 1er mai au 30 juin 2026, déposez votre dossier pour rejoindre les 12 startups de notre prochaine cohorte. Mentorat, accès au réseau et Demo Day mondial.',
-    category: 'Annonces',
-    date: '2026-05-01',
-    author: 'Équipe CAURIS DIGITAL',
-    readingTime: 4,
-    image: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=80',
-  },
-  {
-    slug: 'guide-pitch-deck-startup',
-    title: 'Le guide ultime du pitch deck pour startups tech africaines',
-    excerpt:
-      'Structure, narratif, financials, design : tout ce que vous devez savoir pour construire un pitch deck qui convainc les investisseurs africains et internationaux. Modèle gratuit inclus.',
-    category: 'Ressources',
-    date: '2026-03-22',
-    author: 'Équipe CAURIS DIGITAL',
-    readingTime: 12,
-    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80',
-  },
-  {
-    slug: 'fintech-afrique-tendances-2026',
-    title: 'Fintech Afrique : les 5 tendances qui vont marquer 2026',
-    excerpt:
-      'Mobile money, embedded finance, crypto, scoring alternatif, banque verte : analyse des modèles qui décollent sur le continent et de ceux qui s\'essoufflent.',
-    category: 'Opinions',
-    date: '2026-02-10',
-    author: 'Équipe CAURIS DIGITAL',
-    readingTime: 9,
-    image: 'https://images.unsplash.com/photo-1601597111158-2fceff292cdc?w=800&q=80',
-  },
-  {
-    slug: 'demo-day-2025-recap',
-    title: 'Demo Day 2025 : les 12 startups qui ont marqué l\'édition',
-    excerpt:
-      'Retour sur la promotion 2025 du programme Incubation : 12 pitchs, 250 participants, 8 partenariats annoncés et 1,2M€ en intentions d\'investissement. Récap en vidéo et statistiques.',
-    category: 'Événements',
-    date: '2025-12-05',
-    author: 'Équipe CAURIS DIGITAL',
-    readingTime: 7,
-    image: 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800&q=80',
-  },
-  {
-    slug: 'femmes-entrepreneures-afrique',
-    title: 'Femmes entrepreneures : pourquoi nous doublons leur représentation en 2026',
-    excerpt:
-      'L\'Afrique est le continent où les femmes entreprennent le plus — mais où elles peinent le plus à lever des fonds. Notre nouveau programme dédié et nos engagements concrets.',
-    category: 'Annonces',
-    date: '2026-03-08',
-    author: 'Équipe CAURIS DIGITAL',
-    readingTime: 5,
-    image: 'https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=800&q=80',
-  },
-];
-
-const CATEGORIES: Array<'Toutes' | Category> = [
-  'Toutes',
-  'Annonces',
-  'Portraits',
-  'Ressources',
-  'Événements',
-  'Opinions',
-];
-
-const CATEGORY_COLORS: Record<Category, string> = {
-  Annonces: 'bg-cauris-orange/10 text-cauris-orange',
-  Portraits: 'bg-pink-100 text-pink-700',
-  Ressources: 'bg-cauris-success/10 text-cauris-success',
-  Événements: 'bg-purple-100 text-purple-700',
-  Opinions: 'bg-blue-100 text-blue-700',
-};
+import { ArrowRight, Search, X } from 'lucide-react';
+import {
+  ARTICLES,
+  ARTICLE_CATEGORIES,
+  type ArticleCategory,
+} from '@/lib/constants';
+import ArticleCard from '@/components/ui/ArticleCard';
 
 const PAGE_SIZE = 6;
 
-function formatDate(iso: string): string {
-  return new Date(iso + 'T00:00:00').toLocaleDateString('fr-FR', {
-    day: '2-digit',
-    month: 'long',
-    year: 'numeric',
-  });
-}
-
+/**
+ * Explorateur du blog : filtres par catégorie + recherche + pagination.
+ */
 export default function NewsExplorer() {
-  const [category, setCategory] = useState<'Toutes' | Category>('Toutes');
+  const [category, setCategory] = useState<'Toutes' | ArticleCategory>('Toutes');
   const [query, setQuery] = useState('');
   const [page, setPage] = useState(1);
 
@@ -134,7 +32,7 @@ export default function NewsExplorer() {
   const safePage = Math.min(page, totalPages);
   const visible = filtered.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
 
-  const handleCategoryChange = (cat: 'Toutes' | Category) => {
+  const handleCategoryChange = (cat: 'Toutes' | ArticleCategory) => {
     setCategory(cat);
     setPage(1);
   };
@@ -145,7 +43,7 @@ export default function NewsExplorer() {
         {/* Filtres : catégories + recherche */}
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-10">
           <div className="flex flex-wrap gap-2">
-            {CATEGORIES.map((cat) => (
+            {ARTICLE_CATEGORIES.map((cat) => (
               <button
                 key={cat}
                 type="button"
@@ -162,7 +60,10 @@ export default function NewsExplorer() {
           </div>
 
           <div className="relative lg:max-w-xs lg:w-full">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-cauris-gray-secondary" aria-hidden="true" />
+            <Search
+              className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-cauris-gray-secondary"
+              aria-hidden="true"
+            />
             <input
               type="text"
               value={query}
@@ -200,50 +101,7 @@ export default function NewsExplorer() {
           <>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
               {visible.map((article) => (
-                <article key={article.slug} className="group flex flex-col">
-                  <Link
-                    href={`/actualites/${article.slug}`}
-                    className="block overflow-hidden rounded-card mb-4 shadow-card group-hover:shadow-card-hover transition-shadow aspect-[16/10]"
-                  >
-                    <img
-                      src={article.image}
-                      alt=""
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      loading="lazy"
-                    />
-                  </Link>
-
-                  <span
-                    className={`inline-flex self-start text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full mb-3 ${CATEGORY_COLORS[article.category]}`}
-                  >
-                    {article.category}
-                  </span>
-
-                  <h2 className="font-heading font-bold text-lg lg:text-xl text-cauris-black leading-tight mb-2 group-hover:text-cauris-orange transition-colors">
-                    <Link href={`/actualites/${article.slug}`}>{article.title}</Link>
-                  </h2>
-
-                  <p className="text-sm text-cauris-gray-text leading-relaxed mb-4 line-clamp-2">
-                    {article.excerpt}
-                  </p>
-
-                  <div className="mt-auto flex items-center gap-3 text-xs text-cauris-gray-secondary">
-                    <span className="flex items-center gap-1">
-                      <Calendar className="w-3 h-3" aria-hidden="true" />
-                      {formatDate(article.date)}
-                    </span>
-                    <span aria-hidden>·</span>
-                    <span className="flex items-center gap-1">
-                      <Clock className="w-3 h-3" aria-hidden="true" />
-                      {article.readingTime} min
-                    </span>
-                    <span aria-hidden>·</span>
-                    <span className="flex items-center gap-1 truncate">
-                      <User className="w-3 h-3" aria-hidden="true" />
-                      <span className="truncate">{article.author}</span>
-                    </span>
-                  </div>
-                </article>
+                <ArticleCard key={article.slug} article={article} />
               ))}
             </div>
 

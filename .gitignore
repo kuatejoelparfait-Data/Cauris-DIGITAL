@@ -49,3 +49,6 @@ Thumbs.db
 
 # Brouillon images (les vraies images sont copiées dans public/images/)
 /images
+
+.vercel
+.env*

@@ -7,7 +7,7 @@ import { SITE_CONFIG } from '@/lib/constants';
 export const metadata: Metadata = {
   title: 'Contactez CAURIS DIGITAL — Yaoundé, Cameroun | Incubateur numérique africain',
   description:
-    'Contactez l\'équipe de CAURIS DIGITAL pour une candidature, un partenariat ou toute question. Basés à Yaoundé, nous répondons sous 48h ouvrées.',
+    'Contactez l\'équipe de CAURIS DIGITAL pour une candidature, un partenariat ou toute question. Basés à Yaoundé, nous répondons dans les plus brefs délais.',
 };
 
 interface PageProps {
@@ -29,7 +29,7 @@ export default function ContactPage({ searchParams }: PageProps) {
             </h1>
             <p className="text-lg text-cauris-gray-text leading-relaxed">
               Une question sur nos programmes ? Un projet de partenariat ? Une idée à partager ?
-              Notre équipe répond sous 48h ouvrées.
+              Notre équipe répond dans les plus brefs délais.
             </p>
           </div>
         </div>

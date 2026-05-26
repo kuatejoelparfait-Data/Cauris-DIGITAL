@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { Linkedin, Trophy, Users, Target, Handshake, Globe2, Globe } from 'lucide-react';
 import SectionTitle from '@/components/ui/SectionTitle';
 import Reveal from '@/components/ui/Reveal';
@@ -132,12 +133,13 @@ export default function AboutPage() {
 
             <Reveal delay={150} className="lg:col-span-2">
               <div className="space-y-6 lg:sticky lg:top-28">
-                <div className="aspect-[4/5] rounded-card overflow-hidden shadow-card-hover">
-                  <img
+                <div className="relative aspect-[4/5] rounded-card overflow-hidden shadow-card-hover">
+                  <Image
                     src={BRAND_IMAGES.aboutHistory}
                     alt="Équipe d'entrepreneurs africains en session collaborative"
-                    className="w-full h-full object-cover"
-                    loading="lazy"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 40vw"
+                    className="object-cover"
                   />
                 </div>
                 <div className="bg-cauris-black text-white p-6 rounded-card">
@@ -236,12 +238,13 @@ export default function AboutPage() {
             {TEAM.map((member, i) => (
               <Reveal key={`${member.name}-${i}`} delay={i * 80}>
                 <article className="group">
-                  <div className="aspect-square rounded-card overflow-hidden mb-4 shadow-card group-hover:shadow-card-hover transition-shadow">
-                    <img
+                  <div className="relative aspect-square rounded-card overflow-hidden mb-4 shadow-card group-hover:shadow-card-hover transition-shadow">
+                    <Image
                       src={member.photo}
                       alt={`Portrait de ${member.name}`}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      loading="lazy"
+                      fill
+                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
                   <h3 className="font-heading font-bold text-lg text-cauris-black">

@@ -10,13 +10,15 @@ import { BRAND_IMAGES } from '@/lib/constants';
 export default function Hero() {
   return (
     <section className="relative min-h-[88vh] lg:min-h-[92vh] flex items-center pt-16 lg:pt-20 overflow-hidden bg-cauris-black">
-      {/* Image de fond */}
+      {/* Image de fond — priority pour optimiser le LCP (Largest Contentful Paint) */}
       <div className="absolute inset-0">
         <Image
           src={BRAND_IMAGES.heroBackground}
           alt="Entrepreneurs africains au travail dans un espace de coworking moderne"
           fill
           priority
+          quality={80}
+          fetchPriority="high"
           className="object-cover object-center"
           sizes="100vw"
         />

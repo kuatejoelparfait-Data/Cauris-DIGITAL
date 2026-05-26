@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import {
@@ -151,12 +152,17 @@ export default function ArticlePage({ params }: PageProps) {
         {/* Image principale */}
         <div className="container-cauris">
           <div className="max-w-4xl mx-auto -mt-2 mb-12">
-            <figure className="rounded-card overflow-hidden shadow-card-hover aspect-[16/9]">
-              <img
-                src={article.image}
-                alt={article.imageCaption ?? article.title}
-                className="w-full h-full object-cover"
-              />
+            <figure>
+              <div className="relative rounded-card overflow-hidden shadow-card-hover aspect-[16/9]">
+                <Image
+                  src={article.image}
+                  alt={article.imageCaption ?? article.title}
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 896px"
+                  className="object-cover"
+                />
+              </div>
               {article.imageCaption && (
                 <figcaption className="mt-3 text-xs text-cauris-gray-secondary italic text-center">
                   {article.imageCaption}

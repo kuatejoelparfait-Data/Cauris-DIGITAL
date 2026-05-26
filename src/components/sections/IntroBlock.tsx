@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import Reveal from '@/components/ui/Reveal';
@@ -50,39 +51,43 @@ export default function IntroBlock() {
             <div className="relative">
               <div className="grid grid-cols-2 gap-3 sm:gap-4">
                 <div className="space-y-3 sm:space-y-4">
-                  <div className="aspect-[3/4] rounded-card overflow-hidden shadow-card bg-cauris-orange/10">
-                    <img
+                  <div className="relative aspect-[3/4] rounded-card overflow-hidden shadow-card bg-cauris-orange/10">
+                    <Image
                       src={BRAND_IMAGES.introPitch}
                       alt="Entrepreneure africaine présentant son pitch"
-                      className="w-full h-full object-cover"
-                      loading="lazy"
+                      fill
+                      sizes="(max-width: 768px) 50vw, 25vw"
+                      className="object-cover"
                     />
                   </div>
-                  <div className="aspect-square rounded-card overflow-hidden shadow-card bg-cauris-cream">
-                    <img
+                  <div className="relative aspect-square rounded-card overflow-hidden shadow-card bg-cauris-cream">
+                    <Image
                       src={BRAND_IMAGES.introMentoring}
                       alt="Session de mentorat avec une entrepreneure africaine"
-                      className="w-full h-full object-cover"
-                      loading="lazy"
+                      fill
+                      sizes="(max-width: 768px) 50vw, 25vw"
+                      className="object-cover"
                     />
                   </div>
                 </div>
                 {/* Décalage uniquement sur sm+ pour l'effet mosaïque, droit sur mobile */}
                 <div className="space-y-3 sm:space-y-4 sm:pt-12">
-                  <div className="aspect-square rounded-card overflow-hidden shadow-card bg-cauris-black">
-                    <img
+                  <div className="relative aspect-square rounded-card overflow-hidden shadow-card bg-cauris-black">
+                    <Image
                       src={BRAND_IMAGES.introCoworking}
                       alt="Atelier collectif au sein de l'écosystème CAURIS DIGITAL"
-                      className="w-full h-full object-cover"
-                      loading="lazy"
+                      fill
+                      sizes="(max-width: 768px) 50vw, 25vw"
+                      className="object-cover"
                     />
                   </div>
-                  <div className="aspect-[3/4] rounded-card overflow-hidden shadow-card bg-cauris-orange">
-                    <img
+                  <div className="relative aspect-[3/4] rounded-card overflow-hidden shadow-card bg-cauris-orange">
+                    <Image
                       src={BRAND_IMAGES.introWorkshop}
                       alt="Entrepreneurs africains en session de travail collaboratif"
-                      className="w-full h-full object-cover"
-                      loading="lazy"
+                      fill
+                      sizes="(max-width: 768px) 50vw, 25vw"
+                      className="object-cover"
                     />
                   </div>
                 </div>

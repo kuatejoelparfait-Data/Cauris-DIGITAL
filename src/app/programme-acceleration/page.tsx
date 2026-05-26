@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import {
   ArrowRight,
   Check,
@@ -124,12 +125,14 @@ export default function AccelerationProgramPage() {
             </div>
 
             <div className="lg:col-span-2">
-              <div className="aspect-[4/5] rounded-card overflow-hidden shadow-card-hover">
-                <img
+              <div className="relative aspect-[4/5] rounded-card overflow-hidden shadow-card-hover">
+                <Image
                   src={BRAND_IMAGES.accelerationHero}
                   alt="Entrepreneur africain en session de travail durant le programme d'accélération"
-                  className="w-full h-full object-cover"
-                  loading="lazy"
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                  className="object-cover"
                 />
               </div>
             </div>
