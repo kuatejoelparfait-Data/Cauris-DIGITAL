@@ -77,13 +77,14 @@ export default function GoogleAnalytics() {
 
   return (
     <>
-      {/* Script principal gtag.js (chargé après l'interaction utilisateur) */}
+      {/* Script principal gtag.js — lazyOnload pour ne pas bloquer le rendu
+          (chargé pendant le browser idle, après que tout est interactif) */}
       <Script
-        strategy="afterInteractive"
+        strategy="lazyOnload"
         src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`}
       />
-      {/* Initialisation gtag */}
-      <Script id="ga4-init" strategy="afterInteractive">
+      {/* Initialisation gtag — même stratégie */}
+      <Script id="ga4-init" strategy="lazyOnload">
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){ dataLayer.push(arguments); }
